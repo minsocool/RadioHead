@@ -1,0 +1,15 @@
+export default {
+  headPhones: require('../assets/image/headPhones.png'),
+  topLoginScreen: require('../assets/image/topLoginScreen.png'),
+  backGround: require('../assets/image/backGround.jpg'),
+  personal: require('../assets/image/personal.jpg'),
+  theWeeknd: require('../assets/image/theWeeknd.png'),
+  postMalone: require('../assets/image/postMalone.png'),
+  travisScott: require('../assets/image/travisScott.png'),
+  drake: require('../assets/image/drake.png'),
+  lilNasX: require('../assets/image/lilNasX.png'),
+  imagineDragons: require('../assets/image/imagineDragons.jpg'),
+  duncanLaurence: require('../assets/image/duncanLaurence.jpg'),
+  justinBieber: require('../assets/image/justinBieber.png'),
+  mgk: require('../assets/image/MGK.png'),
+};
