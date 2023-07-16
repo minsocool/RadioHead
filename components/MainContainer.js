@@ -7,6 +7,14 @@ import {
   LibraryScreen,
   AlbumSongs,
 } from '../screens'; // Screen
+import {
+  Text,
+  View,
+  Image,
+  Dimensions,
+  SafeAreaView,
+  FlatList,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -34,10 +42,11 @@ function MainContainer(props) {
           fontFamily: 'SFProText-Bold',
         },
         tabBarStyle: {
+          alignItems:'flex-start',
           backgroundColor: 'black',
           padding: 10,
-          width: 375,
-          height: 70,
+          width: 420,
+          height: 78,
         },
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
@@ -60,7 +69,7 @@ function MainContainer(props) {
         name="Library"
         component={LibraryStack}
         options={{
-          tabBarBadge: 3,
+          tabBarBadge: 4,
           tabBarBadgeStyle: {backgroundColor: 'red'},
         }}
       />

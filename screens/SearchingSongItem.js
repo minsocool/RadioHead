@@ -11,7 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import {images, icons, colors, fontSizes} from '../constants';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+ // Searching
 function _getColorFromCategories(categories) {
   /*
     if(categories.toLowerCase().trim() == 'pop') {
@@ -76,7 +76,7 @@ function SearchingSongItem(props) {
               fontFamily: 'SFProText-Bold',
               color: 'white',
               alignSelf: 'flex-start',
-              fontSize: 16,
+              fontSize: 18,
               marginTop: 5,
             }}>
             {song}

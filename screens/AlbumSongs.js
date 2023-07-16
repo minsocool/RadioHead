@@ -12,7 +12,7 @@ import {images} from '../constants';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import playSongsData from '../data/playSongsData';
 import PlaySongsItem from './PlaySongsItem';
-
+// album (ListScreen)
 function AlbumSongs(props) {
   const PlaySongScreen = () => props.navigation.navigate('PlaySongScreen');
   const [shouldShowSongs, setShouldShowSongs] = useState(false);
@@ -71,15 +71,29 @@ function AlbumSongs(props) {
           backgroundColor: 'white',
           marginHorizontal: 25,
         }}>
-        <Text
+        <View
           style={{
-            fontFamily: 'SFProText-Bold',
-            color: 'black',
-            fontSize: 23,
+            flexDirection: 'row',
             marginTop: 10,
           }}>
-          @playListNames
-        </Text>
+          <Image
+            resizeMode="center"
+            style={{width: 50, height: 50, borderRadius: 200, marginRight: 8}}
+            source={{
+              uri: 'https://scontent.fsgn13-4.fna.fbcdn.net/v/t1.6435-9/151976378_1477453042590151_5017245083365615848_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_ohc=FSe-6n270uAAX9MLJCC&_nc_ht=scontent.fsgn13-4.fna&oh=00_AfDLe7aa2wkJ2gPKTLhKGlvTD-BFKdBukjYOXRgdS-j7Dg&oe=64DB20F9',
+            }}
+          />
+          <Text
+            style={{
+              fontFamily: 'SFProText-Bold',
+              color: 'black',
+              fontSize: 23,
+              marginTop: 10,
+            }}>
+            @minsocool's Playlist
+          </Text>
+        </View>
+
         <View
           style={{
             height: 60,
@@ -87,7 +101,6 @@ function AlbumSongs(props) {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'center',
               alignItems: 'center',
             }}>
             <TextInput
@@ -97,13 +110,12 @@ function AlbumSongs(props) {
               style={{
                 fontFamily: 'SFProText-Bold',
                 fontSize: 16,
-                width: 320,
+                width: 360,
                 height: 40,
                 color: 'white',
                 backgroundColor: '#293942',
                 borderRadius: 50,
                 marginTop: 20,
-                marginLeft: 30,
                 paddingLeft: 15,
                 opacity: 0.8,
               }}
@@ -130,7 +142,7 @@ function AlbumSongs(props) {
           <TouchableOpacity
             onPress={() => alert('You press Shuffle Play @randomSongs')}
             style={{
-              width: 180,
+              width: 230,
               height: 40,
               backgroundColor: '#7971E9',
               alignItems: 'center',
@@ -151,7 +163,7 @@ function AlbumSongs(props) {
           <TouchableOpacity
             onPress={() => alert('You press Add Songs ')}
             style={{
-              width: 120,
+              width: 110,
               height: 40,
               backgroundColor: '#293942',
               alignItems: 'center',

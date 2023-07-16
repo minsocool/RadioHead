@@ -6,58 +6,53 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
-  StyleSheet,
   Dimensions,
 } from 'react-native';
+
+import Video from 'react-native-video';
 import Slider from '@react-native-community/slider';
 import TRACKS from '../data/tracksData';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import TrackPlayer from 'react-native-track-player';
-import playSongsData from '../data/playSongsData';
-
+import {images, icons, colors, fontSizes} from '../constants';
+import AlbumArt from '../components/AlbumArt';
+import AlbumDetails from '../components/AlbumDetails';
+import Control from '../components/Control';
 const {width, height} = Dimensions.get('window');
 
 function PlaySongScreen(props) {
-  {
-    /*const [selectedTrack, setSelectedTrack] = useState(0);
-  const currentTrack = TRACKS[selectedTrack];
+  const [selectedTrack, setSelectedTrack] = useState(0);
+
   const [pause, setPause] = useState(false);
+
+  const currentTrack = TRACKS[selectedTrack];
+
+  // console.log({currentTrack});
+
   function togglePlayPauseBtn() {
     setPause(!pause);
   }
-  const tracks = [
-    {
-      id: 1,
-      url: require('../assets/songs/Travis-Scott-feat-Don-Toliver-What-To-Do.mp3'),
-    },
-  ];
-  TrackPlayer.updateOptions({
-    stopWithApp: false,
-    capabilities: [TrackPlayer.CAPABILITY_PLAY, TrackPlayer.CAPABILITY_PAUSE],
-    compactCapabilities: [
-      TrackPlayer.CAPABILITY_PLAY,
-      TrackPlayer.CAPABILITY_PAUSE,
-    ],
-  });
 
-  const setUpTrackPlayer = async () => {
-    try {
-      await TrackPlayer.setupPlayer();
-      await TrackPlayer.add(tracks);
-      console.log('Tracks added');
-    } catch (e) {
-      console.log(e);
+  // play the next song
+
+  function playNextSong() {
+    // if the select track is the last song and next btn is pressed then set the first song
+    // TRACKS.length - 1 = last song
+    if (selectedTrack === TRACKS.length - 1) {
+      // the last song then reset
+      setSelectedTrack(0);
+    } else {
+      // else next song
+      setSelectedTrack(selectedTrack + 1);
     }
-  };
-
-  useEffect(() => {
-    setUpTrackPlayer();
-
-    return () => TrackPlayer.destroy();
-  }, []);
-*/
+  }
+  function playPrevSong() {
+    // if the select track is the first song and prev btn is pressed then set the last song
+    if (selectedTrack === 0) {
+      setSelectedTrack(TRACKS.length - 1); // play the last song data
+    } else {
+      setSelectedTrack(selectedTrack - 1);
+    }
   }
 
   const renderSongs = ({item, index}) => {
@@ -66,27 +61,25 @@ function PlaySongScreen(props) {
         style={{
           flex: 30,
           width: width,
-          justifyContent: 'center',
-          alignItems: 'flex-start',
         }}>
-        <View style={[style.imageWrapper, style.elevation]}>
-          <Image // album cover
+        <View>
+          <Image
             source={{uri: item.albumArtURL}}
             style={{
-              width: 375,
-              height: 350,
-              borderRadius: 10,
+              width: width,
+              height: 400,
             }}
-            resizeMode="contain"
+            resizeMode="cover"
           />
           <FontAwesome
             name={'chevron-down'}
-            color={'white'}
-            size={25}
+            color={'black'}
+            size={30}
             style={{
-              alignSelf: 'flex-end',
               position: 'absolute',
-              marginTop: 20,
+              alignSelf: 'flex-end',
+              marginTop: 25,
+              right: 30,
             }}
           />
         </View>
@@ -99,17 +92,7 @@ function PlaySongScreen(props) {
         flex: 100,
         backgroundColor: 'black',
       }}>
-      <FlatList
-        renderItem={renderSongs}
-        data={TRACKS}
-        keyExtractor={item => item.id}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={16}
-        onScroll={() => {}}
-      />
-
+      <AlbumArt albumArt={currentTrack.albumArtURL} />
       <View // album details
         style={{
           flexDirection: 'row',
@@ -117,25 +100,10 @@ function PlaySongScreen(props) {
           flex: 10,
           marginHorizontal: 25,
         }}>
-        <View>
-          <Text
-            style={{
-              fontFamily: 'SFProText-Bold',
-              fontSize: 17,
-              color: 'white',
-            }}>
-            WHAT TO DO? (ft. Don Toliver)
-          </Text>
-          <Text
-            style={{
-              fontFamily: 'SFProText-Bold',
-              fontSize: 13,
-              color: '#F9F8FF',
-              opacity: 0.5,
-            }}>
-            JACKBOYS, Travis Scott
-          </Text>
-        </View>
+        <AlbumDetails
+          trackName={currentTrack.title}
+          artistName={currentTrack.artist}
+        />
         <View style={{flex: 1}} />
         <Entypo
           name={'dots-three-vertical'}
@@ -143,7 +111,7 @@ function PlaySongScreen(props) {
           size={25}
           style={{
             marginTop: 10,
-            left: 10,
+            left: 15,
           }}
         />
       </View>
@@ -158,22 +126,21 @@ function PlaySongScreen(props) {
         >
           <Slider
             style={{
-              width: 340,
-              height: 40,
+              width: width - 15,
+              height: 20,
               flexDirection: 'row',
               marginHorizontal: 10,
             }}
-            value={10}
+            value={0.5}
             minimumValue={0}
             maximumValue={1}
             thumbTintColor="white"
             minimumTrackTintColor="#FFFFFF"
             maximumTrackTintColor="#F4EEFF"
-            onSlidingComplete={() => {}}
+            onSlidingComplete={() => {}} // xu ly het nhac => next music
           />
           <View
             style={{
-              width: 310,
               flexDirection: 'row',
               justifyContent: 'space-between',
               marginHorizontal: 25,
@@ -183,6 +150,7 @@ function PlaySongScreen(props) {
                 color: 'gray',
                 fontFamily: 'SFProText-Bold',
                 fontSize: 15,
+                alignSelf: 'flex-start',
               }}>
               1:32
             </Text>
@@ -191,75 +159,83 @@ function PlaySongScreen(props) {
                 color: 'gray',
                 fontFamily: 'SFProText-Bold',
                 fontSize: 15,
+                alignSelf: 'flex-end',
               }}>
-              3:31
+              3:33
             </Text>
           </View>
         </View>
-
-        <View // control Back/Play/Next Song
+        <Control
+          {...{togglePlayPauseBtn}}
+          {...{pause}}
+          {...{playNextSong}}
+          {...{playPrevSong}}
+        />
+        {/* Play a song */}
+        <Video
+          source={currentTrack.audioUrl}
+          audioOnly
+          paused={pause}
+          controls={true}
+          currentTime={5.2}
+        />
+        <View
           style={{
-            flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center',
+            alignSelf: 'center',
+            flexDirection: 'row',
+            marginTop: 40,
           }}>
-          <TouchableOpacity>
-            <FontAwesome name={'step-backward'} color={'white'} size={30} />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <AntDesign
-              name={'play'}
-              color={'white'}
-              size={50}
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginHorizontal: 30,
-              }}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <FontAwesome name={'step-forward'} color={'white'} size={30} />
-          </TouchableOpacity>
+          <FontAwesome name="volume-off" size={16} color="gray" />
+          <Slider // Sound effect
+            style={{
+              width: 250,
+              marginHorizontal: 10,
+            }}
+            value={0.8}
+            minimumValue={0}
+            maximumValue={1}
+            thumbTintColor="white"
+            minimumTrackTintColor="#5F9EA0"
+            maximumTrackTintColor="#F4EEFF"
+          />
+          <FontAwesome name="volume-up" size={16} color="gray" />
         </View>
       </View>
-      <View
+
+      <TouchableOpacity
         style={{
           // lyrics
-          flex: 10,
-          backgroundColor: 'cyan',
+          flex: 12,
+          backgroundColor: '#0D1117',
           justifyContent: 'center',
           alignItems: 'center',
+          borderTopLeftRadius: 30,
+          borderTopRightRadius: 30,
+        }}
+        onPress={() => {
+          alert('pressed lyrics');
         }}>
         <Text
           style={{
             fontFamily: 'SFProText-Bold',
-            color: 'black',
+            color: 'white',
             fontSize: 20,
           }}>
           Lyrics
         </Text>
-      </View>
+        <FontAwesome
+          name={'chevron-down'}
+          color={'white'}
+          size={15}
+          style={{
+            position: 'absolute',
+            alignSelf: 'flex-end',
+            right: 30,
+          }}
+        />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
 export default PlaySongScreen;
-
-const style = StyleSheet.create({
-  imageWrapper: {
-    width: 340,
-    height: 340,
-  },
-  elevation: {
-    elevation: 5,
-    shadowColor: '#ccc',
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowOpacity: 5,
-    shadowRadius: 3,
-  },
-});

@@ -164,11 +164,7 @@ function LibraryScreen(props) {
         <FlatList
           data={datalist}
           renderItem={({item}) => (
-            <PlayListsItem
-              playLists={item}
-              onPress={AlbumSongDetails}
-              key={item.id}
-            />
+            <PlayListsItem playLists={item} onPress={AlbumSongDetails} />
           )}
           keyExtractor={item => item.id}
         />

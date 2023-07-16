@@ -2,8 +2,8 @@ const playListsData = [
   {
     id: 1,
     image:
-      'https://www.irancartoon.com/site/media/cache/7a/35/7a35a1a822d89ef2d5ceb26b8ccbee99.jpg',
-    playListNames: 'myDisc',
+      'https://scontent.fsgn13-4.fna.fbcdn.net/v/t1.6435-9/151976378_1477453042590151_5017245083365615848_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=174925&_nc_ohc=FSe-6n270uAAX9MLJCC&_nc_ht=scontent.fsgn13-4.fna&oh=00_AfDLe7aa2wkJ2gPKTLhKGlvTD-BFKdBukjYOXRgdS-j7Dg&oe=64DB20F9',
+    playListNames: 'minsocool',
     album: 'Playlists',
     adjustIcon: 'https://cdn-icons-png.flaticon.com/512/64/64576.png',
   },

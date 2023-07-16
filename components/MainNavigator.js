@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 const MainNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Main">
+      <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen // SplashScreen
           name="Splash"
           component={SplashScreen}

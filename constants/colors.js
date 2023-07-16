@@ -1,5 +1,5 @@
 export default {
-  primary: '#293942',
+  primary: '#0D1117',
   placeholder: '#F9F8FF',
   facebook: 'cyan',
   google: 'white',

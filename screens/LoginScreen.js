@@ -77,8 +77,10 @@ function LoginScreen(props) {
         <Image
           source={images.topLoginScreen}
           style={{
-            width: 420,
-            height: 230,
+            width: 400,
+            height: 250,
+            borderBottomLeftRadius: 15,
+            borderBottomRightRadius: 15,
           }}
           resizeMode="center"></Image>
       </View>
